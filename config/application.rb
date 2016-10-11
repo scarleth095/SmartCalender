@@ -2,6 +2,10 @@ require_relative 'boot'
 
 require 'rails/all'
 
+require 'weather_man'
+ WeatherMan.partner_id = '0123456789'
+WeatherMan.license_key = '0123456789abcdef'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
