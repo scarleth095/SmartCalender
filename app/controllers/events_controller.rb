@@ -1,9 +1,12 @@
 class EventsController < ApplicationController
+ 
 def index
-    @event = Event.all
+    @events = Event.all
   end
 
-  def show    
+  def show  
+      @event=Event.find(params[:id])
+       @event.destroy
   end
 
   def new
@@ -31,6 +34,7 @@ def index
   end
 
   def destroy
+    @event=Event.find(params[:id])
     @event.destroy
     redirect_to "/"
   end

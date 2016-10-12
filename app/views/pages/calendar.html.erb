@@ -35,8 +35,11 @@ th { width: 33%;
         position:relative;
         left:75%;
        
-
+.
      
+    }
+    .containsEvent{
+        background-color:#eafbfa;
     }
     #info{
         position:relative;
@@ -73,6 +76,14 @@ th { width: 33%;
         top: 45px;
         left: 220px;
     }
+    .today{
+        background-color:#1b7e7d;
+        
+        
+    }
+    .today a{
+        color:white !important;
+    }
     
 </style>
 
@@ -87,7 +98,9 @@ th { width: 33%;
             
         </td>
             <td id="music" colspan="3">
-               <iframe style="border:none" src="http://files.podsnack.com/iframe/embed.html?hash=a1nfbsll&t=1476142365" width="100%" height="54" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+               <iframe style="border:none" src="http://files.podsnack.com/iframe/embed.html?hash=a19adeqq&t=1476205912" width="100%" height="54" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+        
+
             </td>
             <td id="infotoday1" colspan="1" >
                 <span id="info"> &nbsp;&nbsp;&nbsp;<span id="todaysunrise"></span></span>
@@ -133,13 +146,18 @@ th { width: 33%;
         <% 6.times do |i| %>
         <tr>
             <% 7.times do |x| %>
-            <td class="days">
                
                 <%if i==0 and x==Date.today.beginning_of_month.wday%>
-                <% y=1 %>  <a onclick="modal(<%=y%>)"><%=y%>  <i class="weathericon"  id="<%=y%>"></i></a>
+            <% y=1 %>
+             <td  id="day_box_<%=y%>" class="days">
+                  <a onclick="modal(<%=y%>)"><%=y%>  <i class="weathericon"  id="<%=y%>"></i></a>
                 <%else%>
                 <% if y!=0 and y!=Date.today.end_of_month.day %>
-                <% y+=1 %>  <a onclick="modal(<%=y%>)"> <%= y %> <i class="weathericon" id="<%=y%>"></i></a>
+                 <% y+=1 %> 
+                 <td  id="day_box_<%=y%>" class="days">
+                 <a onclick="modal(<%=y%>)"> <%= y %> <i class="weathericon" id="<%=y%>"></i></a>
+                     <%else%>
+                     <td   class="days">
                 <%end%>
                 <%end %>
                 
@@ -168,27 +186,53 @@ th { width: 33%;
           <h4 id="datemodal" class="modal-title"></h4>
         </div>
         <div class="modal-body">
-          <p>Events</p>
-            
-<%= form_for @event do |f| %>
-  <p>
-      <%= f.label :date %><br>
-     <input type="hidden" id="event_date" name="event[date]" value="" />
-  </p>
+      
+            <div class="panel with-nav-tabs panel-default">
+                <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1default" data-toggle="tab">Events</a></li>
+                            <li><a href="#tab2default" data-toggle="tab">Create an Event</a></li>
+                        </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1default">Events
+                        <span id="event_list"></span>
 
-  <p>
-      <%= f.label :description %><br>
-  <%= f.text_area :description %>
-  </p>
-  <p>
-      <%= f.label :time %><br>
-      <%= f.text_field :time %>
-  </p> 
-  <p>
- 
-  <%= f.submit %>
-  </p>
-  <% end %>
+                        </div>
+                        <div class="tab-pane fade" id="tab2default">Create an Event
+                        <%= form_for @event do |f| %>
+  
+                              <div class="form-group">
+
+                             <input type="hidden" id="event_date" name="event[date]" value="" />
+
+                                    </div>
+                          <div class="form-group">
+                              <%= f.label :description %><br>
+                          <%= f.text_area :description, :class =>"form-control"%>
+                                    </div>
+                                    <div class="form-group">
+                              <%= f.label :time %><br> 
+
+                              <%= f.time_select :time,  {ampm: true}, :class =>"form-control"%>
+
+                                    </div>
+
+
+                          <%= f.submit :class =>"btn btn-default"%>
+
+                          <% end %>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            
+            
+            
+            
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -220,15 +264,27 @@ th { width: 33%;
 
 
 
-<% @events.each do |event|%>
-<%=event.description%>
-<%=event.time%>
-<%=event.date%>
-<%end%>
+
 
 <script>
     
     
+    
+    
+    
+    function deletethis(id){
+
+                         $.ajax({
+				        type: "GET",
+				        url: "/events/" + id,
+				        complete: function(){
+                            window.location.href="/";
+        				 				        	
+				        	
+				        }
+				    });
+                        
+    }
     
     var url="http://api.openweathermap.org/data/2.5/forecast/daily?";
     var lat="";
@@ -260,10 +316,54 @@ function error(err) {
 
 navigator.geolocation.getCurrentPosition(success, error, options);
     
-    
+
+    var event_list_day=[];
+
+    <% @events.each_with_index do |event, index|%>
+    event_list_day.push(['<%=event.description%>',<%=event.date%>,'<%=event.time%>',<%=event.id%>]);
+<%end%>
+      for(var i=0; i<event_list_day.length; i++){
+          var num=event_list_day[i][1];
+          $("#day_box_"+num).addClass("containsEvent");
+      }
+    var today_date=<%= @date.day%>;
+     $("#day_box_"+today_date).addClass("today");
+                  
 function modal(day){
     $("#myModal").modal('show');
     $("#datemodal").html("<%= @date.strftime("%B")%> "+day+", <%= @date.year%>");
+    var event_list=[];
+     $("#event_date").val(day);    
+    for(var i=0; i<event_list_day.length; i++){
+        if (event_list_day[i][1]==day){
+            event_list.push(event_list_day[i]);
+        }
+    }
+    var list_string='<ul class="list-group">'
+console.log(event_list);
+    for(var y=0; y<event_list.length; y++){
+        var desc=event_list[y][0];
+        
+        var date= event_list[y][1];
+        var time= event_list[y][2].split(",");
+        if(time.length==5){
+        var hour= time[3].split("=&gt;");
+        var min= time[4].split("=&gt;");
+        min=min[1].split("}");
+            if (min[0] <10){
+                min[0]="0"+min[0];
+            }
+        
+        var id= event_list[y][3];
+        list_string+='<li class="list-group-item"><button onclick="deletethis('+id+')" data-id="'+id+'" class="btnDelete btn btn-danger"><i class="fa fa-lg fa-times" aria-hidden="true"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;'+desc+'<span class="badge">'+hour[1]+':'+min[0]+'</span></li>';
+        }
+    }
+    list_string+='</ul>';
+    console.log(list_string);
+    $("#event_list").html(list_string); 
+    
+    
+                         
 }
 
 function getData(url,url2){
@@ -363,3 +463,4 @@ var min2=(date2.getMinutes() < 10) ? ("0" + date2.getMinutes()) : date2.getMinut
 
 </script>
 
+  
