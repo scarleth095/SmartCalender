@@ -81,10 +81,18 @@ th { width: 33%;
         
         
     }
+    .label-lg{
+        margin-top:20px;
+        font-size:20px;
+  
+    }
     .today a{
         color:white !important;
     }
-    
+    .full-block{
+        display:block;
+        width:100%;
+    }
 </style>
 
  <% @date = Date.today  %> 
@@ -150,12 +158,12 @@ th { width: 33%;
                 <%if i==0 and x==Date.today.beginning_of_month.wday%>
             <% y=1 %>
              <td  id="day_box_<%=y%>" class="days">
-                  <a onclick="modal(<%=y%>)"><%=y%>  <i class="weathericon"  id="<%=y%>"></i></a>
+                  <a onclick="modal(<%=y%>)"><%=y%><i class="weathericon"  id="<%=y%>"></i><br><br> <span class="label label-lg label-default full-block table_badge" id="<%=y%>_badge"></span> </a>
                 <%else%>
                 <% if y!=0 and y!=Date.today.end_of_month.day %>
                  <% y+=1 %> 
                  <td  id="day_box_<%=y%>" class="days">
-                 <a onclick="modal(<%=y%>)"> <%= y %> <i class="weathericon" id="<%=y%>"></i></a>
+                 <a onclick="modal(<%=y%>)"> <%= y %> <i class="weathericon" id="<%=y%>"></i><br><br> <span class="label label-lg  full-block label-default  table_badge" id="<%=y%>_badge"></span></a>
                      <%else%>
                      <td   class="days">
                 <%end%>
@@ -210,7 +218,7 @@ th { width: 33%;
                                     </div>
                           <div class="form-group">
                               <%= f.label :description %><br>
-                          <%= f.text_area :description, :class =>"form-control"%>
+                              <%= f.text_field :description, :class =>"form-control"%>
                                     </div>
                                     <div class="form-group">
                               <%= f.label :time %><br> 
@@ -322,10 +330,32 @@ navigator.geolocation.getCurrentPosition(success, error, options);
     <% @events.each_with_index do |event, index|%>
     event_list_day.push(['<%=event.description%>',<%=event.date%>,'<%=event.time%>',<%=event.id%>]);
 <%end%>
+    var day_array=[]
+    for(var i=0; i<31; i++){
+          day_array.push(0);
+         
+      }
       for(var i=0; i<event_list_day.length; i++){
           var num=event_list_day[i][1];
-          $("#day_box_"+num).addClass("containsEvent");
+          day_array[num-1]+=1;
+         
       }
+    for(var i=0; i<day_array.length; i++){
+          if (day_array[i]!=0){
+              var x= i+1;
+              var y=day_array[i];
+              if(y ==1){
+               $("#"+x+"_badge").html(y+" Event");
+              }else{
+                   $("#"+x+"_badge").html(y+" Events");
+              }
+
+              
+              
+          }
+         
+      }
+    
     var today_date=<%= @date.day%>;
      $("#day_box_"+today_date).addClass("today");
                   
@@ -439,7 +469,11 @@ var min2=(date2.getMinutes() < 10) ? ("0" + date2.getMinutes()) : date2.getMinut
        var articles=data.articles;
         var news="";
          for(var i=0; i<articles.length; i++){
-             var art= "|&nbsp;&nbsp;<a onclick='popupNews("+'"'+articles[i].url+'"'+","+'"'+articles[i].title+'"'+")'>"+ articles[i].title+"</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+             var title=articles[i].title;
+             if( title.split("'").length>1){
+             }
+             var art= '|&nbsp;&nbsp;<a onclick="popupNews('+"'"+articles[i].url+"'"+","+"'"+articles[i].title+"'"+')">'+ articles[i].title+"</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+            console.log(art);
           
              news=news+art;
          }
@@ -462,5 +496,6 @@ var min2=(date2.getMinutes() < 10) ? ("0" + date2.getMinutes()) : date2.getMinut
     }
 
 </script>
+
 
   
