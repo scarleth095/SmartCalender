@@ -13,6 +13,7 @@ API used "http://api.openweathermap.org"
 -Music player is an iframe music player. Can choose any generic music player you want. If you have ideas in integreating a music API for this would be helpful.
 
 FEATURES TO COME:
+
 -Voice activited event creation/music player/weather forecast.
 -Integration with google calender
 -Multiple month ahead planning
