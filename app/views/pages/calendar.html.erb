@@ -324,27 +324,14 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
     
     
     
-    var options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
-
-function success(pos) {
-  var crd = pos.coords;
-
- lat= crd.latitude;
- lon=crd.longitude;
+ lat="40.848802899999995"
+ lon="-74.0221759";
  url=url+"lat="+lat+"&lon="+lon+"&cnt=7&mode=json&appid=eccff7e6a1be7793a5f98da9fa745b6a";
  var url2= "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid=eccff7e6a1be7793a5f98da9fa745b6a";
  getData(url, url2);
-};
 
-function error(err) {
-  console.warn('ERROR(' + err.code + '): ' + err.message);
-};
 
-navigator.geolocation.getCurrentPosition(success, error, options);
+
     
 
     var event_list_day=[];
