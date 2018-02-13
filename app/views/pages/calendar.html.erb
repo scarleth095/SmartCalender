@@ -50,12 +50,13 @@ th { width: 33%;
     }
     #infotoday{
          border-left:none;
-        text-align:right;
+        text-align:left;
     }#infotoday1{
          border-left:none;
          border-right:none;
         text-align:left;
     }
+   
     #today{
         font-size:20px;
     }
@@ -74,7 +75,7 @@ th { width: 33%;
     #subdate{
         position:absolute;
         top: 45px;
-        left: 220px;
+        left: 210px;
     }
     .today{
         background-color:#1b7e7d;
@@ -82,8 +83,8 @@ th { width: 33%;
         
     }
     .label-lg{
-        margin-top:20px;
-        font-size:20px;
+        margin-top:15px;
+        font-size:15px;
   
     }
     .today a{
@@ -102,21 +103,30 @@ th { width: 33%;
         <tr id="today">
         <td  id="weathertoday" colspan="2">
           <i id="todayicon"></i>&nbsp; <span id="todaydesc"></span> <span id="todaytempday"></span> 
-            <p id="subdate"><sub><%= @date.strftime("%B %d , %Y")%></sub></p>
+            <p id="subdate"><sub><%= @date.strftime("%B %d , %Y")%>&nbsp; &nbsp;</sub> </p>
             
         </td>
             <td id="music" colspan="3">
-               <iframe style="border:none" src="http://files.podsnack.com/iframe/embed.html?hash=a19adeqq&t=1476205912" width="100%" height="54" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-        
-
+                <iframe style="border:none" src="https://open.spotify.com/embed?uri=spotify:user:1257503092:playlist:3EMA8NNGN8digS6gg88O3q&theme=white&view=coverart" frameborder="0" allowtransparency="true" width="100%" height="80" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
             </td>
+            
             <td id="infotoday1" colspan="1" >
-                <span id="info"> &nbsp;&nbsp;&nbsp;<span id="todaysunrise"></span></span>
+                
+                <i class="fas fa-heartbeat fa-lg"></i>
+                <br>
+                <i class="fas fa-moon fa-lg"></i>
+               
                   
             </td>
+            
+           
             <td id="infotoday" colspan="1" >
-                <span id="info"><span id="todaysunset">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
-                  
+               <img height=30px src="data:image/svg+xml;base64,
+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDc1LjIyIDc1LjIyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA3NS4yMiA3NS4yMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxnPgoJPHBhdGggZD0iTTY3LjEwNCwwSDguMTE3QzMuNjM1LDAsMCwzLjYzNCwwLDguMTE3djU4Ljk4N2MwLDQuNDgxLDMuNjM1LDguMTE2LDguMTE3LDguMTE2aDU4Ljk4N2M0LjQ4MiwwLDguMTE2LTMuNjM1LDguMTE2LTguMTE2ICAgVjguMTE3Qzc1LjIyLDMuNjMzLDcxLjU4NywwLDY3LjEwNCwweiBNNTMuOTIyLDguNDU0bC02LjAzNSw4Ljk1NWMtMy41ODUtMi40MTYtNy4wNTktMy4yMDctMTAuMDg1LTMuMTk5bC00LjMzNS03LjM0OCAgIGwtMS4wNjgsMC41NzlsMy40MTksNi44OWMtNC43ODcsMC41NjEtOC4wNSwyLjkwNC04LjEwNSwyLjk0NWwtNi40MTItOC42ODhDMjEuOTM5LDguMTE1LDM3LjE1Ni0yLjg0NSw1My45MjIsOC40NTR6ICAgIE02Ni4wODksNTguNDk2YzAsNC40ODItMy42MzQsOC4xMTctOC4xMTcsOC4xMTdIMTcuMTE0Yy00LjQ4MywwLTguMTE3LTMuNjM1LTguMTE3LTguMTE3VjI5LjgzMWMwLTQuNDgzLDMuNjM0LTguMTE3LDguMTE3LTguMTE3ICAgaDQwLjg1N2M0LjQ4MywwLDguMTE3LDMuNjM0LDguMTE3LDguMTE3TDY2LjA4OSw1OC40OTZMNjYuMDg5LDU4LjQ5NnoiIHN0eWxlPSJmaWxsOiMyM0I2QTciIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgZGF0YS1vbGRfY29sb3I9IiMyMkI1QTYiPjwvcGF0aD4KPC9nPjwvZz4gPC9zdmc+" />
+                  <i class="fas fa-fire fa-lg"></i>
+                <br>
+                <img  height=30px src="data:image/svg+xml;base64,
+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxNS40NTggNTE1LjQ1OCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTE1LjQ1OCA1MTUuNDU4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgY2xhc3M9IiI+PGc+PGc+Cgk8cGF0aCBkPSJNMjk4Ljc5NCwzODYuNzExYzI3LjgwNSw5LjUyMiw1Mi4zNTcsMTUuNTg3LDg3LjYzMywyNi40MjdDMzcyLjg3NSw1ODQuMzc0LDIxMC45NTIsNTE2LjM3MSwyOTguNzk0LDM4Ni43MTF6ICAgIE00NDMuMzY2LDIyOS40MDljLTEuODI2LTUxLjQxNS0xMC44ODItMTE4Ljg2LTgzLjAxNy0xMDguMjkyYy0zMy44MTUsOC44MjUtNTguOCw0NS45NjItNzAuNTUxLDExMC4wMzUgICBjLTYuNDU0LDM1LjIyOS0yLjcwMSw4NC42NzgsNC45MTIsMTE0LjMyYzYuOTUxLDIwLjg4OSw0LjU4NywxOS42MDUsMTIuMDU4LDIzLjU3MmMyOC45MTYsNi41MTQsNTcuNTQyLDEzLjcyNSw4Ni42OTMsMjEuMDc4ICAgQzQyMy4wNzUsMzY5LjIwOSw0NDcuMzk3LDI1OC4xODIsNDQzLjM2NiwyMjkuNDA5eiBNMjIwLjc1MiwyMjUuNDYzYzcuNjA3LTI5LjY0NiwxMS4zNi03OS4wOTUsNC45MDktMTE0LjMyICAgQzIxMy45MTksNDcuMDY3LDE4OC45MzEsOS45MjQsMTU1LjExLDEuMTA1QzgyLjk3NS05LjQ2Myw3My45MTksNTcuOTgxLDcyLjA5MywxMDkuMzk5ICAgYy00LjAzMSwyOC43NjgsMjAuMjk0LDEzOS44MDIsNDkuOTExLDE2MC43MTFjMjkuMTQ5LTcuMzUzLDU3Ljc3MS0xNC41NTgsODYuNjk2LTIxLjA3OCAgIEMyMTYuMTYyLDI0NS4wNjksMjEzLjc5OCwyNDYuMzUyLDIyMC43NTIsMjI1LjQ2M3ogTTEyOS4wMjksMjkzLjEzMmMxMy41NDcsMTcxLjIzNCwxNzUuNDcsMTAzLjIzMSw4Ny42My0yNi40MjcgICBDMTg4Ljg1NCwyNzYuMjI4LDE2NC4zMDQsMjgyLjI5MiwxMjkuMDI5LDI5My4xMzJ6IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBjbGFzcz0iYWN0aXZlLXBhdGgiIHN0eWxlPSJmaWxsOiMzQ0FDQUEiIGRhdGEtb2xkX2NvbG9yPSIjM0JBQUE4Ij48L3BhdGg+CjwvZz48L2c+IDwvc3ZnPg==" />
             </td>
         </tr>
         <tr>
@@ -163,7 +173,17 @@ th { width: 33%;
                 <% if y!=0 and y!=Date.today.end_of_month.day %>
                  <% y+=1 %> 
                  <td  id="day_box_<%=y%>" class="days">
-                 <a onclick="modal(<%=y%>)"> <%= y %> <i class="weathericon" id="<%=y%>"></i><br><br> <span class="label label-lg  full-block label-default  table_badge" id="<%=y%>_badge"></span></a>
+                 <a onclick="modal(<%=y%>)"> <%= y %> <i class="weathericon" id="<%=y%>"></i>
+                      <% if @holidays %>
+                     <% if @hol=@holidays.find {|x| x[:date] == Date.today.change(:day => y)}%>
+                    
+                     <span class="label label-lg  full-block label-primary  table_badge"> <%=@hol[:name]%></span>
+                     
+                     <%end%>
+                     
+                
+                     <%end%>
+                     <span class="label label-lg  full-block label-default  table_badge" id="<%=y%>_badge"></span></a>
                      <%else%>
                      <td   class="days">
                 <%end%>
@@ -205,6 +225,8 @@ th { width: 33%;
                 <div class="panel-body">
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="tab1default">Events
+                        
+                    
                         <span id="event_list"></span>
 
                         </div>
